@@ -2,7 +2,6 @@ package com.zcj.wei_shi_360.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.zcj.wei_shi_360.R;
 
@@ -13,7 +12,5 @@ public class Setup1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup1);
     }
-    public void next(View view){
-        
-    }
+
 }
