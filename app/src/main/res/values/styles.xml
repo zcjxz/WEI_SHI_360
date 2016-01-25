@@ -50,5 +50,6 @@
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:onClick">"next"</item>
     </style>
 </resources>
