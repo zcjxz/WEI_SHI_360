@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zcj.wei_shi_360.activity.setup3">
+    tools:context="com.zcj.wei_shi_360.activity.setup3"
+    android:orientation="vertical">
     <TextView
         style="@style/TitleStyle"
         android:text="3.设置安全号码"/>
@@ -12,5 +13,10 @@
         android:text="      SIM卡变更后，报警短信回发送到安全号码"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="输入安全号码"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择联系人"/>
 </LinearLayout>
