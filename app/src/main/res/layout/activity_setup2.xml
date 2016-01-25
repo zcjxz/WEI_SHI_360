@@ -59,6 +59,4 @@
         <Button
             style="@style/PreviousStyle" />
     </RelativeLayout>
-
-
 </LinearLayout>
