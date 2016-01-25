@@ -4,5 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zcj.wei_shi_360.activity.Setup2">
-
+    <TextView
+        style="@style/TitleStyle"
+        android:text="2.手机卡绑定"/>
 </RelativeLayout>
