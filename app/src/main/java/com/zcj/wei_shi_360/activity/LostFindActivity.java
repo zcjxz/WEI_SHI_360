@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 import com.zcj.wei_shi_360.R;
 
-/**
- * Created by 曾灿杰 on 2016/1/24.
- */
 public class LostFindActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +20,9 @@ public class LostFindActivity extends Activity {
             startActivity(new Intent(LostFindActivity.this,Setup1.class));
             finish();
         }
+    }
+    public void reEnterSetrp(View v ){
+         startActivity(new Intent(LostFindActivity.this,Setup1.class));
+        finish();
     }
 }
