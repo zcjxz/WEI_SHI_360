@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.zcj.wei_shi_360.R;
 
-public class Setup4 extends AppCompatActivity {
+public class Setup4 extends BaseActivity {
 
     private SharedPreferences config;
 
@@ -19,13 +19,16 @@ public class Setup4 extends AppCompatActivity {
         config = getSharedPreferences("config", MODE_PRIVATE);
     }
 
-    public void next(View v) {
+    @Override
+    public void showNext() {
         startActivity(new Intent(Setup4.this, LostFindActivity.class));
         finish();
         config.edit().putBoolean("configed",true).commit();
         overridePendingTransition(R.anim.tran_in, R.anim.tran_out);
     }
-    public void previous(View v){
+
+    @Override
+    public void showPrevious() {
         startActivity(new Intent(Setup4.this,setup3.class));
         finish();
         overridePendingTransition(R.anim.tran_up, R.anim.tran_down);

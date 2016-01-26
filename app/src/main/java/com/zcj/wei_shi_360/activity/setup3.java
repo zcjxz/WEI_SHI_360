@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.zcj.wei_shi_360.R;
 
-public class setup3 extends AppCompatActivity {
+public class setup3 extends BaseActivity {
 
 
     @Override
@@ -15,12 +15,16 @@ public class setup3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup3);
     }
-    public void next(View v){
+
+    @Override
+    public void showNext() {
         startActivity(new Intent(setup3.this,Setup4.class));
         finish();
         overridePendingTransition(R.anim.tran_in, R.anim.tran_out);
     }
-    public void previous(View v){
+
+    @Override
+    public void showPrevious() {
         startActivity(new Intent(setup3.this,Setup2.class));
         finish();
         overridePendingTransition(R.anim.tran_up, R.anim.tran_down);
