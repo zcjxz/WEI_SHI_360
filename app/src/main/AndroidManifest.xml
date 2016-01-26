@@ -29,7 +29,8 @@
         <activity android:name=".activity.LostFindActivity" />
         <activity android:name=".activity.Setup1" />
         <activity android:name=".activity.Setup2" />
-        <activity android:name=".activity.setup3"></activity>
+        <activity android:name=".activity.setup3" />
+        <activity android:name=".activity.Setup4"></activity>
     </application>
 
 </manifest>
