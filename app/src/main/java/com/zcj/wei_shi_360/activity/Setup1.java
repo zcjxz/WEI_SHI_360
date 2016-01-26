@@ -15,9 +15,10 @@ public class Setup1 extends AppCompatActivity {
         setContentView(R.layout.activity_setup1);
 
     }
-    public void next(View view){
-        startActivity(new Intent(Setup1.this,Setup2.class));
-        finish();
 
+    public void next(View view) {
+        startActivity(new Intent(Setup1.this, Setup2.class));
+        finish();
+        overridePendingTransition(R.anim.tran_in,R.anim.tran_out);
     }
 }

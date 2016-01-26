@@ -18,9 +18,11 @@ public class setup3 extends AppCompatActivity {
     public void next(View v){
         startActivity(new Intent(setup3.this,Setup4.class));
         finish();
+        overridePendingTransition(R.anim.tran_in, R.anim.tran_out);
     }
     public void previous(View v){
         startActivity(new Intent(setup3.this,Setup2.class));
         finish();
+        overridePendingTransition(R.anim.tran_up, R.anim.tran_down);
     }
 }

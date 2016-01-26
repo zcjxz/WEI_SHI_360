@@ -23,9 +23,11 @@ public class Setup4 extends AppCompatActivity {
         startActivity(new Intent(Setup4.this, LostFindActivity.class));
         finish();
         config.edit().putBoolean("configed",true).commit();
+        overridePendingTransition(R.anim.tran_in, R.anim.tran_out);
     }
     public void previous(View v){
         startActivity(new Intent(Setup4.this,setup3.class));
         finish();
+        overridePendingTransition(R.anim.tran_up, R.anim.tran_down);
     }
 }
