@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -30,7 +32,12 @@
         <activity android:name=".activity.Setup1" />
         <activity android:name=".activity.Setup2" />
         <activity android:name=".activity.setup3" />
-        <activity android:name=".activity.Setup4"></activity>
+        <activity android:name=".activity.Setup4"/>
+        <receiver android:name=".receiver.BootCompleteReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>//开机广播
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

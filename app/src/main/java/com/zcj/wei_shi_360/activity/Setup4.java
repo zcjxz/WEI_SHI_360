@@ -10,13 +10,13 @@ import com.zcj.wei_shi_360.R;
 
 public class Setup4 extends BaseActivity {
 
-    private SharedPreferences config;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup4);
-        config = getSharedPreferences("config", MODE_PRIVATE);
+
     }
 
     @Override

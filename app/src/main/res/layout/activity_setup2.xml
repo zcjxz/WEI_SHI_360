@@ -16,6 +16,7 @@
         style="@style/ContentStyle"
         android:text="      下次重启手机，如果发现SIM卡发现变化就发送报警短信"/>
     <com.zcj.wei_shi_360.view.SettingItemView
+        android:id="@+id/siv_sim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:item_title="点击绑定SIM卡"
