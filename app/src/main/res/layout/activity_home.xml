@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zcj.wei_shi_360.activity.HomeActivity"
-    >
+    android:orientation="vertical">
     <TextView
-        android:id="@+id/gnlb"
         android:text="老子就是功能列表"
         style="@style/TitleStyle"
         />
     <com.zcj.wei_shi_360.view.FocusedTextView
-        android:layout_below="@id/gnlb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="有了手机卫士，腰不酸，腿部疼，走路也有劲了，手机卫士太TM牛逼了！！！"
@@ -27,4 +25,4 @@
         android:layout_centerVertical="true">
 
     </GridView>
-</RelativeLayout>
+</LinearLayout>

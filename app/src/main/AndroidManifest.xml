@@ -23,11 +23,14 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SettingActivity" />
+        <activity
+            android:name=".activity.ContactActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.LostFindActivity" />
         <activity android:name=".activity.Setup1" />
@@ -42,7 +45,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.ContactActivity"/>
+
     </application>
 
 </manifest>
