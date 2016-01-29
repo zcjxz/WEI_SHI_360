@@ -9,6 +9,7 @@
         style="@style/TitleStyle"
         android:text="4.恭喜您，设置完成"/>
     <CheckBox
+        android:id="@+id/cb_protect"
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"

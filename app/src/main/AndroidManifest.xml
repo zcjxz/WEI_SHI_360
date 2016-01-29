@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -44,7 +46,13 @@
                 //开机广播
             </intent-filter>
         </receiver>
-
+        <receiver android:name=".receiver.SmsReceiver">
+            <intent-filter
+                android:priority="2147483647">
+                //短信拦截
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>//容易写错
+            </intent-filter>
+        </receiver>
 
     </application>
 

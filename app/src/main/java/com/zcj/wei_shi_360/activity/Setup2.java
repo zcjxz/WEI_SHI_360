@@ -9,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import com.zcj.wei_shi_360.R;
 import com.zcj.wei_shi_360.view.SettingItemView;
@@ -47,9 +48,13 @@ public class Setup2 extends BaseActivity {
 
     @Override
     public void showNext() {
-        startActivity(new Intent(Setup2.this, setup3.class));
-        finish();
-        overridePendingTransition(R.anim.tran_in, R.anim.tran_out);
+        if (siv_sim.isChecked()) {
+            startActivity(new Intent(Setup2.this, setup3.class));
+            finish();
+            overridePendingTransition(R.anim.tran_in, R.anim.tran_out);
+        }else{
+            Toast.makeText(Setup2.this, "请绑定SIM卡才能进入下一步", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

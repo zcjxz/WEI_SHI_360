@@ -19,6 +19,7 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        config = getSharedPreferences("config", MODE_PRIVATE);
         gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -38,7 +39,6 @@ public abstract class BaseActivity extends Activity {
                 return super.onFling(e1, e2, velocityX, velocityY);
             }
         });
-        config = getSharedPreferences("config", MODE_PRIVATE);
     }
     public void next(View v) {
         showNext();

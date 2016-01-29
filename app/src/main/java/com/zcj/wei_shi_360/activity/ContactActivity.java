@@ -1,5 +1,6 @@
 package com.zcj.wei_shi_360.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -34,7 +35,7 @@ public class ContactActivity extends AppCompatActivity {
                 phone.replaceAll(" ","");
                 Intent intent = new Intent();
                 intent.putExtra("phone",phone);
-                setResult(0,intent);
+                setResult(Activity.RESULT_OK,intent);
                 finish();
             }
         });

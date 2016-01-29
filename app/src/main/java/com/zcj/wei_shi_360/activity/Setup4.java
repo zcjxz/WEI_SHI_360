@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.zcj.wei_shi_360.R;
 
@@ -16,7 +18,28 @@ public class Setup4 extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup4);
+        final CheckBox cb_protect = (CheckBox) findViewById(R.id.cb_protect);
+        boolean protect = config.getBoolean("protect", false);
+        if (protect) {
+            cb_protect.setText("防盗保护已经开启");
+            cb_protect.setChecked(true);
+        }else{
+            cb_protect.setText("防盗保护已经关闭");
+            cb_protect.setChecked(false);
+        }
 
+        cb_protect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    cb_protect.setText("防盗保护已经开启");
+                    config.edit().putBoolean("protect",true).commit();
+                }else{
+                    cb_protect.setText("防盗保护已经关闭");
+                    config.edit().putBoolean("protect",false).commit();
+                }
+            }
+        });
     }
 
     @Override

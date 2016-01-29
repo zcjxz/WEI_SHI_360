@@ -15,7 +15,8 @@
         android:id="@+id/et_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="输入安全号码"/>
+        android:hint="输入安全号码"
+        android:inputType="phone"/>
     <Button
         android:onClick="selectContact"
         android:layout_width="match_parent"
