@@ -1,6 +1,7 @@
 package com.zcj.wei_shi_360.activity;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,7 +39,8 @@ public class LostFindActivity extends Activity {
         }
     }
     public void reEnterSetrp(View v ){
-        startActivity(new Intent(LostFindActivity.this,Setup1.class));
+        startActivity(new Intent(LostFindActivity.this, Setup1.class));
         finish();
     }
+
 }

@@ -15,6 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="防盗保护没有开启"/>
+    <CheckBox
+        android:id="@+id/deviced"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="激活设备管理器（用于远程锁屏，清除数据）"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

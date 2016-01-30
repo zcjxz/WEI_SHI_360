@@ -17,7 +17,7 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         boolean protect = config.getBoolean("protect", false);
         if (protect) {
             if (TextUtils.isEmpty(sim)) {
-
+                //还没有绑定sim卡
             } else {
                 //获取手机当前的sim卡序列号
                 TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -32,7 +32,7 @@ public class BootCompleteReceiver extends BroadcastReceiver {
                 }
             }
         }else{
-
+            //未开启防盗保护
         }
     }
 }

@@ -3,15 +3,14 @@ package com.zcj.wei_shi_360.activity;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.zcj.wei_shi_360.R;
 import com.zcj.wei_shi_360.view.SettingItemView;
 
-/**
- * Created by 曾灿杰 on 2016/1/23.
- */
-public class SettingActivity extends Activity {
+
+public class SettingActivity extends AppCompatActivity {
 
     private SettingItemView sivUpdate;
     private SharedPreferences mPerf;
