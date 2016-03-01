@@ -21,10 +21,11 @@ public class SmsReceiver extends BroadcastReceiver {
 
     private String safe_phone;
     private SmsManager smsManage;
+    private DevicePolicyManager mDPM;
+    private ComponentName mComponentName;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("AAA", "拦截短信");
         SharedPreferences config = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         safe_phone = config.getString("safe_phone", "");
         Object[] objects= (Object[]) intent.getExtras().get("pdus");
@@ -52,18 +53,25 @@ public class SmsReceiver extends BroadcastReceiver {
                     abortBroadcast();//拦截短信
                     String substring = messageBody.substring("#*lockscreen*#".length(), messageBody.length());
                     //获取设备策略服务
-                    DevicePolicyManager mDPM = (DevicePolicyManager) context.getSystemService(context.DEVICE_POLICY_SERVICE);
+                    mDPM = (DevicePolicyManager) context.getSystemService(context.DEVICE_POLICY_SERVICE);
+                    mComponentName = new ComponentName(context, AdminReceiver.class);
                     boolean deviced = config.getBoolean("deviced", false);
-                    if (deviced){
+                    if (mDPM.isAdminActive(mComponentName)){
+                        smsManage.sendTextMessage(safe_phone, null, "成功锁屏", null, null);
                         mDPM.lockNow();
                         mDPM.resetPassword(substring, 0);
-                        smsManage.sendTextMessage(safe_phone, null, "成功锁屏", null, null);
                     }else{
                         smsManage.sendTextMessage(safe_phone, null, "未激活设备管理器，该功能无法使用", null, null);
                     }
                 }else if ("#*wipedata*#".equals(messageBody)){
                     abortBroadcast();//拦截短信
-
+                    if (mDPM.isAdminActive(mComponentName)){
+                        mDPM.wipeData(DevicePolicyManager.WIPE_RESET_PROTECTION_DATA);//清除手机数据
+//                        mDPM.wipeData(DevicePolicyManager.WIPE_EXTERNAL_STORAGE);//清除外置存储卡
+                        smsManage.sendTextMessage(safe_phone, null, "成功清除数据", null, null);
+                    }else{
+                        smsManage.sendTextMessage(safe_phone, null, "未激活设备管理器，该功能无法使用", null, null);
+                    }
                 }
             }
         }

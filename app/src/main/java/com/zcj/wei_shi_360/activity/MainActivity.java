@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -35,8 +36,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -87,7 +90,6 @@ public class MainActivity extends Activity {
     };
     private RelativeLayout rl_root;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +98,8 @@ public class MainActivity extends Activity {
         version= (TextView) findViewById(R.id.tv_version);
         rl_root = (RelativeLayout) findViewById(R.id.rl_root);
         version.setText("版本号：" + getmVersionName());
+        copyDB("address.db");//拷贝数据库
+        //判断是否需要自动更新
         mPerf = getSharedPreferences("config", MODE_PRIVATE);
         boolean autoUpdate = mPerf.getBoolean("auto update", true);
         if (autoUpdate) {
@@ -270,7 +274,28 @@ public class MainActivity extends Activity {
             Toast.makeText(MainActivity.this, "没有找到sd卡", Toast.LENGTH_SHORT).show();
         }
     }
+    private void copyDB(String dbName){
+        File destFile=new File(getFilesDir(),dbName);
+        if (destFile.exists()){
+            Log.d("TAG", "copyDB: 数据库已经存在");
+        }else {
+            try {
 
+                InputStream input =getResources().openRawResource(R.raw.address);
+                FileOutputStream output = new FileOutputStream(destFile);
+                int len = 0;
+                byte[] buffer = new byte[1024];
+                while ((len = input.read(buffer)) != -1) {
+                    output.write(buffer, 0, len);
+                }
+                input.close();
+                output.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.d("TAG", "copyDB:找不到文件 ");
+            }
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         enter();

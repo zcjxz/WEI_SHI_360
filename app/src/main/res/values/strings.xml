@@ -2,5 +2,5 @@
     <string name="app_name">WEI_SHI_360</string>
     <string name="action_settings">Settings</string>
     <string name="description">用于手机防盗，可以一键锁屏，清除数据</string>
-    <string name="label">超级设备管理器</string>
+    <string name="label">WEI_SHI_360 手机防盗模块</string>
 </resources>

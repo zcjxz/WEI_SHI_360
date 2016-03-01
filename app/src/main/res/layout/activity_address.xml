@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zcj.wei_shi_360.activity.AddressActivity">
+    <TextView
+        style="@style/TitleStyle"
+        android:text="归属地查询"
+        />
+    <EditText
+        android:id="@+id/et_address_phone"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:hint="搜索"
+        />
+    <TextView
+        android:id="@+id/tv_show_address_phone"
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textSize="20sp"
+        android:textColor="#000"/>
+</LinearLayout>

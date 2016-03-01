@@ -18,9 +18,9 @@ public class SettingItemView extends RelativeLayout{
     private TextView Desc;
     private CheckBox Status;
     private String NAMESPACE="http://schemas.android.com/apk/res-auto";
-    private String title="000";
-    private String descOn="111";
-    private String descOff="222";
+    private String title="";
+    private String descOn="";
+    private String descOff="";
 
     public SettingItemView(Context context) {
         super(context);

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zcj.wei_shi_360.activity.AToolsActivity">
+    <TextView
+        style="@style/TitleStyle"
+        android:text="高级工具"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:text="电话归属地查询"
+        android:background="@drawable/view_item"
+        android:gravity="center"
+        android:onClick="numberAddressQuery"
+        android:clickable="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:text="常用号码查询"
+        android:background="@drawable/view_item"
+        android:gravity="center"
+
+        android:clickable="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:text="短信备份"
+        android:background="@drawable/view_item"
+        android:gravity="center"
+
+        android:clickable="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:text="程序锁"
+        android:background="@drawable/view_item"
+        android:gravity="center"
+
+        android:clickable="true"/>
+
+</LinearLayout>

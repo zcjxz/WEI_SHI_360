@@ -19,16 +19,20 @@ public class Setup4 extends BaseActivity {
 
     private ComponentName mComponentName;
     private DevicePolicyManager mDPM;
+    private CheckBox device;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup4);
         final CheckBox cb_protect = (CheckBox) findViewById(R.id.cb_protect);
-        CheckBox device = (CheckBox) findViewById(R.id.deviced);
+        device = (CheckBox) findViewById(R.id.deviced);
         boolean protect = config.getBoolean("protect", false);
-        boolean deviced = config.getBoolean("deviced", false);
-        if (deviced){
+        //获取设备策略服务
+        mDPM = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+        mComponentName = new ComponentName(Setup4.this, AdminReceiver.class);
+        //判断是否激活设备管理器
+        if (mDPM.isAdminActive(mComponentName)){
             device.setChecked(true);
         }else{
             device.setChecked(false);
@@ -43,18 +47,16 @@ public class Setup4 extends BaseActivity {
         device.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    //获取设备策略服务
-                    mDPM = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
-                    mComponentName = new ComponentName(Setup4.this, AdminReceiver.class);
-                    Intent intent=new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+                if (isChecked) {
+                    Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
                     intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mComponentName);
-                    intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,"哇哈哈，好牛逼的功能啊");
-                    startActivityForResult(intent, 0);
-                }else{
+                    intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,R.string.description);
+                    startActivityForResult(intent, 0);//在回掉函数中判断是否激活
+                } else {
+                    if (mDPM.isAdminActive(mComponentName)){
                     mDPM.removeActiveAdmin(mComponentName);//取消激活
-                    config.edit().putBoolean("decived",false).commit();
-                    Toast.makeText(Setup4.this, "取消激活成功！！！", Toast.LENGTH_SHORT).show();
+                    config.edit().putBoolean("decived", false).commit();
+                    Toast.makeText(Setup4.this, "取消激活成功！！！", Toast.LENGTH_SHORT).show();}
                 }
             }
         });
@@ -95,8 +97,12 @@ public class Setup4 extends BaseActivity {
                 Toast.makeText(Setup4.this, "激活成功！！！", Toast.LENGTH_SHORT).show();
                 config.edit().putBoolean("deviced",true).commit();
             }else{
-                Toast.makeText(Setup4.this, "激活失败，远程锁屏和清除数据将无法使用！！！", Toast.LENGTH_SHORT).show();
+                device.setChecked(false);
+                Toast.makeText(Setup4.this, "激活失败，远程锁屏和清除数据将无法使用！！！aaaa", Toast.LENGTH_SHORT).show();
             }
+        }else{
+            device.setChecked(false);
+            Toast.makeText(Setup4.this, "激活失败，远程锁屏和清除数据将无法使用！！！", Toast.LENGTH_SHORT).show();
         }
     }
 }

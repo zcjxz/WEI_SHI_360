@@ -5,9 +5,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by 曾灿杰 on 2016/1/21.
- */
 public class StreamUtils {
 
     private static String result;
