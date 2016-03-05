@@ -1,14 +1,19 @@
 package com.zcj.wei_shi_360.activity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.zcj.wei_shi_360.R;
+import com.zcj.wei_shi_360.dbUtils.AddressUtils;
 import com.zcj.wei_shi_360.service.AddressService;
+import com.zcj.wei_shi_360.utils.ServiceStatusUtils;
 import com.zcj.wei_shi_360.view.SettingItemView;
 
 
@@ -28,6 +33,18 @@ public class SettingActivity extends AppCompatActivity {
         //初始化归属地显示
         initAddressView();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        boolean serviceRunning = ServiceStatusUtils.isServiceRunning(this, "com.zcj.wei_shi_360.service.AddressService");
+        if (serviceRunning){
+            sivAddress.setCheck(true);
+        }else{
+            sivAddress.setCheck(false);
+        }
+    }
+
     private void initUpdate(){
         sivUpdate = (SettingItemView) findViewById(R.id.siv_update);
 //        sivUpdate.setTitle("自动更新设置");
@@ -56,17 +73,25 @@ public class SettingActivity extends AppCompatActivity {
     }
     private void initAddressView(){
         sivAddress = (SettingItemView) findViewById(R.id.siv_address);
+        boolean serviceRunning = ServiceStatusUtils.isServiceRunning(this, "com.zcj.wei_shi_360.service.AddressService");
+        if (serviceRunning){
+            sivAddress.setCheck(true);
+        }else{
+            sivAddress.setCheck(false);
+        }
         sivAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sivAddress.isChecked()){
+                if (sivAddress.isChecked()) {
                     sivAddress.setCheck(false);
-                    stopService(new Intent(SettingActivity.this,AddressService.class));
-                }else{
+                    stopService(new Intent(SettingActivity.this, AddressService.class));
+                } else {
                     sivAddress.setCheck(true);
                     startService(new Intent(SettingActivity.this, AddressService.class));
                 }
             }
         });
+
     }
+
 }
