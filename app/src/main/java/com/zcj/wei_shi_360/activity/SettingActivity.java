@@ -1,8 +1,10 @@
 package com.zcj.wei_shi_360.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import com.zcj.wei_shi_360.R;
 import com.zcj.wei_shi_360.dbUtils.AddressUtils;
 import com.zcj.wei_shi_360.service.AddressService;
 import com.zcj.wei_shi_360.utils.ServiceStatusUtils;
+import com.zcj.wei_shi_360.view.SettingClickItemView;
 import com.zcj.wei_shi_360.view.SettingItemView;
 
 
@@ -22,7 +25,8 @@ public class SettingActivity extends AppCompatActivity {
     private SettingItemView sivUpdate;
     private SettingItemView sivAddress;
     private SharedPreferences mPerf;
-
+    private SettingClickItemView sivAddressStyle;
+    final String[] items=new String[]{"半透明","活力橙","卫士蓝","金属灰","苹果绿"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,8 @@ public class SettingActivity extends AppCompatActivity {
         initUpdate();
         //初始化归属地显示
         initAddressView();
+        //初始化归属地显示框风格
+        initAddressStyle();
     }
 
     @Override
@@ -92,6 +98,37 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void initAddressStyle(){
+        String chosed_style=null;
+        sivAddressStyle = (SettingClickItemView) findViewById(R.id.siv_address_style);
+        sivAddressStyle.setTitle("归属地提示框风格");
+        sivAddressStyle.setTitle("活力橙");
+        int address_style = mPerf.getInt("address_style", 0);
+        sivAddressStyle.setDesc(items[address_style]);
+        sivAddressStyle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSingleChooseDailog();
+            }
+        });
+    }
+
+    private void showSingleChooseDailog() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("选择归属地提示框风格");
+        int address_style = mPerf.getInt("address_style", 0);
+        builder.setSingleChoiceItems(items,address_style,new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            mPerf.edit().putInt("address_style",which).commit();
+            dialog.dismiss();
+            sivAddressStyle.setDesc(items[which]);
+            }
+        });
+        builder.setNegativeButton("取消", null);
+        builder.show();
     }
 
 }

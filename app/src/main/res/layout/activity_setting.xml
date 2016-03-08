@@ -22,4 +22,9 @@
         item:desc_on="电话归属地显示已开启"
         item:desc_off="电话归属地显示已关闭"
         />
+    <com.zcj.wei_shi_360.view.SettingClickItemView
+        android:id="@+id/siv_address_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
