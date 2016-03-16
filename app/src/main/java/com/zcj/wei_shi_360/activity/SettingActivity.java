@@ -26,6 +26,7 @@ public class SettingActivity extends AppCompatActivity {
     private SettingItemView sivAddress;
     private SharedPreferences mPerf;
     private SettingClickItemView sivAddressStyle;
+    private SettingClickItemView sivAddressLocation;
     final String[] items=new String[]{"半透明","活力橙","卫士蓝","金属灰","苹果绿"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class SettingActivity extends AppCompatActivity {
         initAddressView();
         //初始化归属地显示框风格
         initAddressStyle();
+        initAddressLocation();
     }
 
     @Override
@@ -103,7 +105,7 @@ public class SettingActivity extends AppCompatActivity {
         String chosed_style=null;
         sivAddressStyle = (SettingClickItemView) findViewById(R.id.siv_address_style);
         sivAddressStyle.setTitle("归属地提示框风格");
-        sivAddressStyle.setTitle("活力橙");
+        sivAddressStyle.setDesc("活力橙");
         int address_style = mPerf.getInt("address_style", 0);
         sivAddressStyle.setDesc(items[address_style]);
         sivAddressStyle.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +115,16 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
-
+    private void initAddressLocation(){
+        sivAddressLocation= (SettingClickItemView) findViewById(R.id.siv_address_location);
+        sivAddressLocation.setTitle("设置归属地显示框位置");
+        sivAddressLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingActivity.this,DragViewActivity.class));
+            }
+        });
+    }
     private void showSingleChooseDailog() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("选择归属地提示框风格");
