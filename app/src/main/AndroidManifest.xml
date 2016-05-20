@@ -86,7 +86,14 @@
         <activity
             android:name=".activity.DragViewActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".activity.CallSafeActivity"/>
+        <activity
+            android:name=".activity.CallSafeActivity"
+            android:windowSoftInputMode="stateHidden" />
+
+        <service
+            android:name=".service.CallSafeService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

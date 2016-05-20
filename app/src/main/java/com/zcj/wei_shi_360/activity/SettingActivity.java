@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.zcj.wei_shi_360.R;
 import com.zcj.wei_shi_360.dbUtils.AddressUtils;
 import com.zcj.wei_shi_360.service.AddressService;
+import com.zcj.wei_shi_360.service.CallSafeService;
 import com.zcj.wei_shi_360.utils.ServiceStatusUtils;
 import com.zcj.wei_shi_360.view.SettingClickItemView;
 import com.zcj.wei_shi_360.view.SettingItemView;
@@ -24,6 +25,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private SettingItemView sivUpdate;
     private SettingItemView sivAddress;
+    private SettingItemView sivCallSafe;
     private SharedPreferences mPerf;
     private SettingClickItemView sivAddressStyle;
     private SettingClickItemView sivAddressLocation;
@@ -39,7 +41,31 @@ public class SettingActivity extends AppCompatActivity {
         initAddressView();
         //初始化归属地显示框风格
         initAddressStyle();
+
         initAddressLocation();
+        initBlackNumber();
+    }
+
+    private void initBlackNumber() {
+        sivCallSafe = (SettingItemView) findViewById(R.id.siv_callsafe);
+        boolean serviceRunning = ServiceStatusUtils.isServiceRunning(this, "com.zcj.wei_shi_360.service.CallSafeService");
+        if (serviceRunning){
+            sivCallSafe.setCheck(true);
+        }else{
+            sivCallSafe.setCheck(false);
+        }
+        sivCallSafe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sivCallSafe.isChecked()) {
+                    sivCallSafe.setCheck(false);
+                    stopService(new Intent(SettingActivity.this, CallSafeService.class));
+                } else {
+                    sivCallSafe.setCheck(true);
+                    startService(new Intent(SettingActivity.this, CallSafeService.class));
+                }
+            }
+        });
     }
 
     @Override
@@ -50,6 +76,12 @@ public class SettingActivity extends AppCompatActivity {
             sivAddress.setCheck(true);
         }else{
             sivAddress.setCheck(false);
+        }
+        boolean CallSafeserviceRunning = ServiceStatusUtils.isServiceRunning(this, "com.zcj.wei_shi_360.service.CallSafeService");
+        if (CallSafeserviceRunning){
+            sivCallSafe.setCheck(true);
+        }else{
+            sivCallSafe.setCheck(false);
         }
     }
 

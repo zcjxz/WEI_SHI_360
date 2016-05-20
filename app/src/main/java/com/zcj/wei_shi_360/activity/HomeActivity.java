@@ -46,10 +46,30 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
+                        //手机防盗
                         showPasswordDialog();
                         break;
+                    case 1:
+                        //通讯卫士
+                        startActivity(new Intent(HomeActivity.this,CallSafeActivity.class));
+                        break;
+                    case 2:
+                        //软件管理
+                        break;
+                    case 3:
+                        //进程管理
+                        break;
+                    case 4:
+                        //流量统计
+                        break;
+                    case 5:
+                        //手机杀毒
+                        break;
+                    case 6:
+                        //缓存清理
+                        break;
                     case 7:
-                        //设置中心
+                        //高级设置
                     startActivity(new Intent(HomeActivity.this, AToolsActivity.class));
                         break;case 8:
                         //设置中心
