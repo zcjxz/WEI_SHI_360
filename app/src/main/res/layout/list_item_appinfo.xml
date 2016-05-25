@@ -5,8 +5,8 @@
     android:paddingBottom="5dp">
     <ImageView
         android:id="@+id/iv_appIcon"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         android:layout_centerVertical="true"
