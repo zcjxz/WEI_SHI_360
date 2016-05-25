@@ -218,7 +218,7 @@ public class CallSafeActivity extends AppCompatActivity {
 
                 private AlertDialog alertDialog;
 
-                
+
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder builder=new AlertDialog.Builder(CallSafeActivity.this);

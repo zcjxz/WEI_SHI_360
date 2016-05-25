@@ -33,7 +33,16 @@
         android:text="短信备份"
         android:background="@drawable/view_item"
         android:gravity="center"
-
+        android:onClick="smsBackup"
+        android:clickable="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:text="短信恢复"
+        android:background="@drawable/view_item"
+        android:gravity="center"
+        android:onClick="smsRestore"
         android:clickable="true"/>
     <TextView
         android:layout_width="match_parent"
