@@ -7,11 +7,13 @@ import android.content.SharedPreferences;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 //监听手机开机启动的广播
 public class BootCompleteReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i("BootCompleteReceiver","开机启动");
         SharedPreferences config = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         String sim = config.getString("sim", null);//获取绑定的sim卡序列号
         boolean protect = config.getBoolean("protect", false);

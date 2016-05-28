@@ -14,6 +14,7 @@ import android.os.Bundle;
 
 import android.text.format.Formatter;
 
+import android.util.Log;
 import android.view.Gravity;
 
 import android.view.View;
@@ -64,7 +65,7 @@ public class AppManagerActivity extends AppCompatActivity {
                 case LOADED_APPINFOS:
                     setListViewData();
                     setListener();
-                    loading.setVisibility(View.INVISIBLE);
+
                     break;
 
             }
@@ -87,7 +88,6 @@ public class AppManagerActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lv_app_manager);
         loading = (LinearLayout) findViewById(R.id.ll_loading);
         tv_status = (TextView) findViewById(R.id.tv_status);
-
         long romSize=getAvailSpace(Environment.getDataDirectory().getAbsolutePath());
         long sdSize=getAvailSpace(Environment.getExternalStorageDirectory().getAbsolutePath());
         tv_avail_rom.setText("内存可用："+ Formatter.formatFileSize(this,romSize));
@@ -143,15 +143,19 @@ public class AppManagerActivity extends AppCompatActivity {
      * 得到数据后，绘制界面
      */
     private void setListViewData(){
+        loading.setVisibility(View.VISIBLE);
         if (appInfoManagerAdapter==null){
         appInfoManagerAdapter = new AppInfoManagerAdapter();
         listView.setAdapter(appInfoManagerAdapter);
         }else{
             appInfoManagerAdapter.notifyDataSetChanged();
         }
-
+        loading.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * 设置监听
+     */
     private void setListener(){
         //设置滑动的监听
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -270,9 +274,26 @@ public class AppManagerActivity extends AppCompatActivity {
         intent.setAction("android.intent.action.DELETE");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.setData(Uri.parse("package:"+appinfo.getPackName()));
-        startActivity(intent);
+        dismissPopupWindow();
+        startActivityForResult(intent,0);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==0){
+            fillData();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void shareApplication(AppInfo appinfo) {
+        Intent intent=new Intent();
+        intent.setAction("android.intent.action.SEND");
+        intent.setType("text/plain");
+        intent.putExtra("android.intent.extra.TEXT","有款应用真的很棒，叫："+appinfo.getName()+"。推荐使用哦");
+        startActivity(intent);
+        dismissPopupWindow();
+    }
     /**
      * 类
      */
@@ -340,6 +361,7 @@ public class AppManagerActivity extends AppCompatActivity {
                     viewHolder=new ViewHolder();
                     viewHolder.tv_Tag = (TextView) convertView.findViewById(R.id.lv_app_info_dao_hang);
                     convertView.setTag(viewHolder);
+                    Log.i("converView为空", "填充了一个tag");
                 }else{
                     convertView=View.inflate(AppManagerActivity.this,R.layout.list_item_appinfo,null);
                     viewHolder=new ViewHolder();
@@ -347,9 +369,11 @@ public class AppManagerActivity extends AppCompatActivity {
                     viewHolder.tv_location= (TextView) convertView.findViewById(R.id.tv_appLocation);
                     viewHolder.iv_icon= (ImageView) convertView.findViewById(R.id.iv_appIcon);
                     convertView.setTag(viewHolder);
+                    Log.i("converView为空", "填充了一个item");
                 }
             }else{
                 viewHolder= (ViewHolder) convertView.getTag();
+                Log.i("converView不为空",position+"");
             }
 
 
@@ -381,6 +405,7 @@ public class AppManagerActivity extends AppCompatActivity {
         }
     }
     private class ViewHolder{
+
         TextView tv_Tag;
         ImageView iv_icon;
         TextView tv_name;
@@ -399,7 +424,7 @@ public class AppManagerActivity extends AppCompatActivity {
                     startApplication(appinfo);
                     break;
                 case R.id.ll_share:
-
+                    shareApplication(appinfo);
                     break;
                 case R.id.ll_uninstall:
                     uninstallApplication(appinfo);
@@ -407,4 +432,6 @@ public class AppManagerActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

@@ -26,6 +26,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i("SmsReceiver", "收到短信");
         SharedPreferences config = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         safe_phone = config.getString("safe_phone", "");
         Object[] objects= (Object[]) intent.getExtras().get("pdus");

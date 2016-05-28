@@ -1,6 +1,5 @@
 package com.zcj.wei_shi_360.utils;
 
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -27,13 +26,13 @@ public class SmsUtils {
          * 设置备份短信进度的总进度
          * @param max 备份短信的总进度的值
          */
-        public void setCount(int max);
+        void setCount(int max);
 
         /**
          * 设置备份短信的当前进度
          * @param progress 备份短信的当前进度的值
          */
-        public void setProgress(int progress);
+        void setProgress(int progress);
     }
 
     private static File file;

@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.bitmap.factory.BitmapFactory;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -111,8 +112,28 @@ public class MainActivity extends Activity {
         AlphaAnimation animation=new AlphaAnimation(0.3f,1f);
         animation.setDuration(2000);
         rl_root.startAnimation(animation);
+        installShortCut();
     }
 
+    private void installShortCut() {
+        boolean shortcut = mPerf.getBoolean("shortcut", false);
+        if (shortcut){
+            return;
+        }
+        //发送广播意图，要桌面创建快捷图标
+        Intent intent=new Intent();
+        intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME,"手机小卫士");
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, android.graphics.BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher));
+        //创建的快捷图标的意图
+        Intent shortcutIntent=new Intent();
+        shortcutIntent.setAction("android.intent.action.MAIN");
+        shortcutIntent.addCategory("android.intent.category.LAUNCHER");
+        shortcutIntent.setClassName(getPackageName(),"com.zcj.wei_shi_360.activity.MainActivity");
+        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT,shortcutIntent);
+        sendBroadcast(intent);
+        mPerf.edit().putBoolean("shortcut",true).commit();
+    }
 
 
     private String getmVersionName(){
