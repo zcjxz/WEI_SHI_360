@@ -33,11 +33,24 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
-
-        <ListView
-            android:id="@+id/lv_task_manager"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="wrap_content">
+            <ListView
+                android:id="@+id/lv_task_manager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ListView>
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:textSize="18sp"
+                android:text=""
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                android:background="#fff"/>
+        </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/ll_loading"
             android:layout_width="wrap_content"
@@ -53,5 +66,33 @@
                 android:text="正在加载。。。"/>
         </LinearLayout>
     </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:onClick="selectAll"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="全选"/>
+        <Button
+            android:onClick="selectOpp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="反选"/>
+        <Button
+            android:onClick="kill"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="清理"/>
+        <Button
+            android:onClick="setting"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="设置"/>
 
+    </LinearLayout>
 </LinearLayout>

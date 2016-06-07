@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#09C"
+    android:orientation="horizontal"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:id="@+id/appwidget_runing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="#09C"
+                android:text="正在运行：10"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+            <TextView
+                android:id="@+id/appwidget_availmem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="#09C"
+                android:text="可用内存：450MB"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/widget_clean"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/widget_button_background"
+                android:text="清理"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

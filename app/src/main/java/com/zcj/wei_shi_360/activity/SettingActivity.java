@@ -16,6 +16,7 @@ import com.zcj.wei_shi_360.R;
 import com.zcj.wei_shi_360.dbUtils.AddressUtils;
 import com.zcj.wei_shi_360.service.AddressService;
 import com.zcj.wei_shi_360.service.CallSafeService;
+import com.zcj.wei_shi_360.service.WatchDogService;
 import com.zcj.wei_shi_360.utils.ServiceStatusUtils;
 import com.zcj.wei_shi_360.view.SettingClickItemView;
 import com.zcj.wei_shi_360.view.SettingItemView;
@@ -26,6 +27,7 @@ public class SettingActivity extends AppCompatActivity {
     private SettingItemView sivUpdate;
     private SettingItemView sivAddress;
     private SettingItemView sivCallSafe;
+    private SettingItemView sivWatchDog;
     private SharedPreferences mPerf;
     private SettingClickItemView sivAddressStyle;
     private SettingClickItemView sivAddressLocation;
@@ -44,6 +46,7 @@ public class SettingActivity extends AppCompatActivity {
 
         initAddressLocation();
         initBlackNumber();
+        initWatchDog();
     }
 
     private void initBlackNumber() {
@@ -173,5 +176,25 @@ public class SettingActivity extends AppCompatActivity {
         builder.setNegativeButton("取消", null);
         builder.show();
     }
-
+    private void initWatchDog() {
+        sivWatchDog = (SettingItemView) findViewById(R.id.siv_watch_dog);
+        boolean serviceRunning = ServiceStatusUtils.isServiceRunning(this, "com.zcj.wei_shi_360.service.WatchDogService");
+        if (serviceRunning){
+            sivWatchDog.setCheck(true);
+        }else{
+            sivWatchDog.setCheck(false);
+        }
+        sivWatchDog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sivWatchDog.isChecked()) {
+                    sivWatchDog.setCheck(false);
+                    stopService(new Intent(SettingActivity.this, WatchDogService.class));
+                } else {
+                    sivWatchDog.setCheck(true);
+                    startService(new Intent(SettingActivity.this, WatchDogService.class));
+                }
+            }
+        });
+    }
 }

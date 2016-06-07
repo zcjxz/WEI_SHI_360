@@ -39,6 +39,7 @@ import android.widget.Toast;
 
 import com.zcj.wei_shi_360.R;
 import com.zcj.wei_shi_360.bean.AppInfo;
+import com.zcj.wei_shi_360.dbUtils.AppLockDao;
 import com.zcj.wei_shi_360.engine.AppInfoProvider;
 import com.zcj.wei_shi_360.utils.DensityUtil;
 
@@ -57,6 +58,7 @@ public class AppManagerActivity extends AppCompatActivity {
     private List<AppInfo> appInfos;
     private List<AppInfo> userAppInfos;
     private List<AppInfo> systemAppInfos;
+    private AppLockDao dao;
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -83,6 +85,7 @@ public class AppManagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_manager);
+        dao=new AppLockDao(AppManagerActivity.this);
         tv_avail_rom = (TextView) findViewById(R.id.tv_avail_rom);
         tv_avail_sd = (TextView) findViewById(R.id.tv_avail_sd);
         listView = (ListView) findViewById(R.id.lv_app_manager);
@@ -157,6 +160,27 @@ public class AppManagerActivity extends AppCompatActivity {
      * 设置监听
      */
     private void setListener(){
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("onItemLongClick: ", "长按了");
+                Object object = listView.getItemAtPosition(position);
+                if (object!=null&&object instanceof AppInfo){
+                    AppInfo appInfo= (AppInfo) object;
+                    ViewHolder viewHolder = (ViewHolder) view.getTag();
+                    String packName = appInfo.getPackName();
+                    boolean islock = dao.find(packName);
+                    if (islock){
+                        dao.delete(packName);
+                        viewHolder.iv_status.setImageResource(R.drawable.unlock);
+                    }else{
+                        dao.add(packName);
+                        viewHolder.iv_status.setImageResource(R.drawable.lock);
+                    }
+                }
+                return true;
+            }
+        });
         //设置滑动的监听
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -200,6 +224,7 @@ public class AppManagerActivity extends AppCompatActivity {
 //                    }
                     appInfo= (AppInfo) object;
                 }
+
                 dismissPopupWindow();
                 RelativeLayout layout=new RelativeLayout(AppManagerActivity.this);
                 View contentView=View.inflate(AppManagerActivity.this,R.layout.popup_window,null);
@@ -352,8 +377,7 @@ public class AppManagerActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            AppInfo appInfo;
-            ViewHolder viewHolder;
+            final ViewHolder viewHolder;
             int isTag = getItemViewType(position);
             if (convertView==null) {
                 if (isTag == 1) {
@@ -368,6 +392,7 @@ public class AppManagerActivity extends AppCompatActivity {
                     viewHolder.tv_name= (TextView) convertView.findViewById(R.id.tv_appName);
                     viewHolder.tv_location= (TextView) convertView.findViewById(R.id.tv_appLocation);
                     viewHolder.iv_icon= (ImageView) convertView.findViewById(R.id.iv_appIcon);
+                    viewHolder.iv_status=(ImageView) convertView.findViewById(R.id.iv_status);
                     convertView.setTag(viewHolder);
                     Log.i("converView为空", "填充了一个item");
                 }
@@ -384,6 +409,7 @@ public class AppManagerActivity extends AppCompatActivity {
                     viewHolder.tv_Tag.setText("系统程序：");
                 }
             }else{
+                final AppInfo appInfo;
                 if (position<=userAppInfos.size()){
                     int newPosition=position-1;
                     appInfo=userAppInfos.get(newPosition);
@@ -391,7 +417,6 @@ public class AppManagerActivity extends AppCompatActivity {
                     int newPosition=position-1-userAppInfos.size()-1;
                     appInfo=systemAppInfos.get(newPosition);
                 }
-
                 viewHolder.iv_icon.setImageDrawable(appInfo.getIcon());
                 viewHolder.tv_name.setText(appInfo.getName());
                 if(appInfo.isInRom()){
@@ -399,18 +424,24 @@ public class AppManagerActivity extends AppCompatActivity {
                 }else{
                     viewHolder.tv_location.setText("外部存储");
                 }
+                if (dao.find(appInfo.getPackName())){
+                    viewHolder.iv_status.setImageResource(R.drawable.lock);
+                }else{
+                    viewHolder.iv_status.setImageResource(R.drawable.unlock);
+                }
             }
 
             return convertView;
         }
     }
     private class ViewHolder{
-
+        ImageView iv_status;
         TextView tv_Tag;
         ImageView iv_icon;
         TextView tv_name;
         TextView tv_location;
     }
+
     class popupOnClick implements View.OnClickListener {
         private AppInfo appinfo;
         public popupOnClick(AppInfo appinfo){

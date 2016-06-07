@@ -11,7 +11,17 @@
         android:layout_marginRight="5dp"
         android:layout_centerVertical="true"
         android:src="@mipmap/ic_launcher"/>
+    <ImageView
+        android:id="@+id/iv_status"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:clickable="true"
+        android:src="@drawable/lock"/>
     <LinearLayout
+        android:layout_toLeftOf="@id/iv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -32,5 +42,6 @@
             android:textSize="16sp"
             android:text="安装位置"/>
     </LinearLayout>
+
 
 </RelativeLayout>

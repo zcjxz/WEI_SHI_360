@@ -40,5 +40,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+    <com.zcj.wei_shi_360.view.SettingItemView
+        android:id="@+id/siv_watch_dog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        item:item_title="程序锁设置"
+        item:desc_on="程序锁已开启"
+        item:desc_off="程序锁已关闭"
+        />
 
 </LinearLayout>

@@ -6,16 +6,26 @@ import android.graphics.drawable.Drawable;
  * Created by ZCJ on 2016/5/27.
  */
 public class TaskInfo {
-    private Drawable ico;
-    private String name;
-    private String packname;
-    private long memsize;
-
     /**
      * 判断是否为用户进程
 
      */
     private boolean userTask;
+    private Drawable ico;
+    private String name;
+    private String packname;
+    private long memsize;
+    private boolean checked;
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+
 
     @Override
     public String toString() {

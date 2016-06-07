@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Debug;
 
+import com.zcj.wei_shi_360.R;
 import com.zcj.wei_shi_360.bean.TaskInfo;
 
 import java.util.ArrayList;
@@ -38,9 +39,9 @@ public class TaskInfoProvider {
                 String name=applicationInfo.loadLabel(pm).toString();
                 boolean isUserTask;
                 if ((applicationInfo.flags&ApplicationInfo.FLAG_SYSTEM)==0){
-                    isUserTask=false;
-                }else{
                     isUserTask=true;
+                }else{
+                    isUserTask=false;
                 }
                 taskInfo.setPackname(packName);
                 taskInfo.setIco(ic);
@@ -49,6 +50,9 @@ public class TaskInfoProvider {
                 taskInfo.setMemsize(memSize);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
+                taskInfo.setIco(context.getResources().getDrawable(R.mipmap.ic_launcher));
+                taskInfo.setName(packName);
+                taskInfo.setMemsize(memSize);
             }
             taskInfos.add(taskInfo);
         }
