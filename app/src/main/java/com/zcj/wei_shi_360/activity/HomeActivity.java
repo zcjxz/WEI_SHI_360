@@ -63,9 +63,11 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case 4:
                         //流量统计
+                        startActivity(new Intent(HomeActivity.this,TrafficManagerActivity.class));
                         break;
                     case 5:
                         //手机杀毒
+                        startActivity(new Intent(HomeActivity.this,AntiVirusActivity.class));
                         break;
                     case 6:
                         //缓存清理

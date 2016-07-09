@@ -8,7 +8,7 @@ public class AddressUtils {
 
     public static String getAddress(String number) {
         String address = "未知号码";
-        SQLiteDatabase database = SQLiteDatabase.openDatabase(PATH, null, SQLiteDatabase.OPEN_READONLY);;
+        SQLiteDatabase database = SQLiteDatabase.openDatabase(PATH, null, SQLiteDatabase.OPEN_READONLY);
         if (number.matches("^1[3-8]\\d{9}$")) {
             Cursor cursor = database.rawQuery("select location from data2 where id=(select outkey from data1 where id = ?)", new String[]{number.substring(0, 7)});
             if (cursor.getCount() != 0) {

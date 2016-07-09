@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zcj.wei_shi_360.activity.TrafficManagerActivity">
+    <SlidingDrawer
+        android:id="@+id/my_drawer"
+        android:handle="@+id/my_handle"
+        android:content="@+id/my_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@id/my_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:background="@color/colorPrimary"
+            android:id="@id/my_content"
+            android:gravity="center"
+            android:text="我是抽屉内容"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </SlidingDrawer>
+</RelativeLayout>

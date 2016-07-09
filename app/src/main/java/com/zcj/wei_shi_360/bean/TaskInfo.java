@@ -2,9 +2,6 @@ package com.zcj.wei_shi_360.bean;
 
 import android.graphics.drawable.Drawable;
 
-/**
- * Created by ZCJ on 2016/5/27.
- */
 public class TaskInfo {
     /**
      * 判断是否为用户进程

@@ -298,7 +298,7 @@ public class MainActivity extends Activity {
     private void copyDB(String dbName){
         File destFile=new File(getFilesDir(),dbName);
         if (destFile.exists()){
-            Log.d("TAG", "copyDB: 数据库已经存在");
+            Log.d("copyDB", "数据库已经存在");
         }else {
             try {
 

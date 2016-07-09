@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zcj.wei_shi_360.activity.AntiVirusActivity">
+    <TextView
+        style="@style/TitleStyle"
+        android:text="手机杀毒"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <FrameLayout
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            >
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_scanner_malware"/>
+            <ImageView
+                android:id="@+id/iv_scan"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/act_scanning_03"/>
+        </FrameLayout>
+        
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="正在扫描"
+                    android:textSize="20sp"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/My_ProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tv_scan_status"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

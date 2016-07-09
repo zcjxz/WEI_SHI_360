@@ -58,4 +58,22 @@ public class EnterPasswordActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        //屏蔽返回键，返回桌面
+        Intent intent=new Intent();
+        intent.setAction("android.intent.action.MAIN");
+        intent.addCategory("android.intent.category.HOME");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addCategory("android.intent.category.MONKEY");
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 }

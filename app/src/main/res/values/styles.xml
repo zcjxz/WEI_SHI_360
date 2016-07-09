@@ -54,4 +54,7 @@
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:onClick">"previous"</item>
     </style>
+    <style name="My_ProgressBar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+    </style>
 </resources>

@@ -4,12 +4,9 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.RemoteViews;
 
-import com.zcj.wei_shi_360.R;
-import com.zcj.wei_shi_360.service.MyService;
+import com.zcj.wei_shi_360.service.WidgetService;
 import com.zcj.wei_shi_360.utils.ServiceStatusUtils;
-import com.zcj.wei_shi_360.utils.SystemInfoUntil;
 
 /**
  * Implementation of App Widget functionality.
@@ -18,7 +15,7 @@ public class MyAppWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent i=new Intent(context, MyService.class);
+        Intent i=new Intent(context, WidgetService.class);
         context.startService(i);
         super.onReceive(context, intent);
     }
@@ -46,16 +43,16 @@ public class MyAppWidget extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created
-        Intent intent=new Intent(context, MyService.class);
+        Intent intent=new Intent(context, WidgetService.class);
         context.startService(intent);
     }
 
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
-        boolean serviceRunning = ServiceStatusUtils.isServiceRunning(context, "com.zcj.wei_shi_360.service.MyService");
+        boolean serviceRunning = ServiceStatusUtils.isServiceRunning(context, "com.zcj.wei_shi_360.service.WidgetService");
         if (serviceRunning){
-            Intent intent=new Intent(context,MyService.class);
+            Intent intent=new Intent(context,WidgetService.class);
             context.stopService(intent);
         }
     }
