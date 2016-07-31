@@ -8,7 +8,7 @@ public class AntivirsDao {
         boolean result=false;
         String path="data/data/com.zcj.wei_shi_360/files/antivirus.db";
         SQLiteDatabase db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
-        Cursor cursor = db.rawQuery("select desc from datable where md5=?", new String[]{md5});
+        Cursor cursor = db.rawQuery("select * from datable where md5 = ?", new String[]{md5});
         if (cursor.moveToNext()){
             result=true;
         }

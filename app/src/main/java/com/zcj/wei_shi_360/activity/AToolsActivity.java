@@ -22,6 +22,9 @@ public class AToolsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atools);
     }
+    public void startAppLock(View view){
+        startActivity(new Intent(AToolsActivity.this,AppLock.class));
+    }
     public void numberAddressQuery(View view){
         Intent intent=new Intent(this,AddressActivity.class);
         startActivity(intent);

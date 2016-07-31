@@ -143,7 +143,10 @@
             android:excludeFromRecents="true"
             android:launchMode="singleInstance" />
         <activity android:name=".activity.TrafficManagerActivity" />
-        <activity android:name=".activity.AntiVirusActivity"></activity>
+        <activity
+            android:name=".activity.AntiVirusActivity"
+            android:configChanges="orientation|keyboard|screenSize" />
+        <activity android:name=".activity.AppLock"></activity>
     </application>
 
 </manifest>

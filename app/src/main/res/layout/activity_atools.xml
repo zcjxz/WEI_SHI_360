@@ -51,7 +51,7 @@
         android:text="程序锁"
         android:background="@drawable/view_item"
         android:gravity="center"
-
+        android:onClick="startAppLock"
         android:clickable="true"/>
 
 </LinearLayout>

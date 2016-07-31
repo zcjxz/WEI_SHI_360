@@ -100,6 +100,7 @@ public class MainActivity extends Activity {
         rl_root = (RelativeLayout) findViewById(R.id.rl_root);
         version.setText("版本号：" + getmVersionName());
         copyDB("address.db");//拷贝数据库
+        copyDB("antivirus.db");//拷贝病毒数据库
         //判断是否需要自动更新
         mPerf = getSharedPreferences("config", MODE_PRIVATE);
         boolean autoUpdate = mPerf.getBoolean("auto update", true);
@@ -301,8 +302,9 @@ public class MainActivity extends Activity {
             Log.d("copyDB", "数据库已经存在");
         }else {
             try {
-
-                InputStream input =getResources().openRawResource(R.raw.address);
+                AssetManager am =null;
+                am=getAssets();
+                InputStream input =am.open(dbName);
                 FileOutputStream output = new FileOutputStream(destFile);
                 int len = 0;
                 byte[] buffer = new byte[1024];
